@@ -7,9 +7,9 @@ block content
     .small-6.small-centered.columns
       form#registerForm(action='/register', method='post')
         label Email
-        input#emailInput(type= 'email', required, autofocus)
+        input#emailInput(type= 'email', name='email', required, autofocus)
         label Password
-        input#passwordInput(type ='password', required)
+        input#passwordInput(type ='password', name='password', required)
         select#roleSelect
           option(value='host') host
           option(value='guest') guest
