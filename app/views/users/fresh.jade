@@ -1,0 +1,16 @@
+extends ../shared/template
+
+block content
+  h1= title
+
+  .row
+    .small-6.small-centered.columns
+      form#registerForm(action='/register', method='post')
+        label Email
+        input#emailInput(type= 'email', required, autofocus)
+        label Password
+        input#passwordInput(type ='password', required)
+        select#roleSelect
+          option(value='host') host
+          option(value='guest') guest
+        button#submitRegister Register
