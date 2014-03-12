@@ -38,7 +38,7 @@ describe('User', function(){
 
   describe('#register', function(){
     it('should register a new User', function(done){
-      var u1 = new User({role: 'host', userName: 'bob jones', email:'bob@nomail.com', password:'1234'});
+      var u1 = new User({role: 'host', userName: 'bob jones', email:'mknicos@gmail.com', password:'1234'});
       u1.register(function(err, body){
         expect(u1.err).to.be.not.ok;
         expect(u1.password).to.have.length(60);
