@@ -48,7 +48,7 @@ describe('users', function(){
       .field('role', 'host')
       .end(function(err, res){
         expect(res.status).to.equal(302);
-       // expect(res.text).to.include('Home');
+        expect(res.text).to.equal('Moved Temporarily. Redirecting to /');
         done();
       });
     });
