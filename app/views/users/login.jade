@@ -1,0 +1,13 @@
+extends ../shared/template
+
+block content
+  h1= title
+  h3= error
+  .row
+    .small-6.small-centered.columns
+      form#registerForm(action='/login', method='post')
+        label Email
+        input#emailInput(type= 'email', name='email', required, autofocus)
+        label Password
+        input#passwordInput(type ='password', name='password', required)
+        button#submitRegister Login

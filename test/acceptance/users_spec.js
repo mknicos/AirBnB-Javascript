@@ -38,6 +38,17 @@ describe('users', function(){
       });
     });
   });
+  describe('GET /login', function(){
+    it('should display the login page', function(done){
+      request(app)
+      .get('/login')
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        expect(res.text).to.include('Login');
+        done();
+      });
+    });
+  });
 
   describe('POST /register', function(){
     it('should post a user into database, and direct to home page', function(done){
@@ -61,6 +72,31 @@ describe('users', function(){
       .end(function(err, res){
         expect(res.status).to.equal(200);
         expect(res.text).to.include('Register');
+        done();
+      });
+    });
+  });
+  describe('POST /login', function(){
+    it('should login a user already registered in database, and direct to home page', function(done){
+      request(app)
+      .post('/login')
+      .field('email', 'bob2@aol.com')
+      .field('password', '1234')
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        expect(res.text).to.equal('Moved Temporarily. Redirecting to /');
+        done();
+      });
+    });
+    it('should not register a user due to wrong password, and direct to login page', function(done){
+      request(app)
+      .post('/register')
+      .field('email', 'bob2@aol.com')
+      .field('password', '1234')
+      .field('role', 'host')
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        expect(res.text).to.include('Log');
         done();
       });
     });
