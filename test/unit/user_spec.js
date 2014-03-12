@@ -22,7 +22,10 @@ describe('User', function(){
 
   beforeEach(function(done){
     global.nss.db.dropDatabase(function(err, result){
-      done();
+      var u1 = new User({role: 'guest', email:'sue@nomail.com', password:'1234'});
+      u1.register(function(err){
+        done();
+      });
     });
   });
 
@@ -61,4 +64,27 @@ describe('User', function(){
     });
   });
 
+  describe('.findByEmailAndPassword', function(){
+    it('should find user by email and password', function(done){
+      User.findByEmailAndPassword('sue@nomail.com', '1234', function(user){
+        expect(user.email).to.equal('sue@nomail.com');
+        expect(user.password).to.equal('1234');
+        done();
+      });
+    });
+
+    it('should not find user - bad email', function(done){
+      User.findByEmailAndPassword('noone@aol.com', 'abcd', function(user){
+        expect(user).to.be.null;
+        done();
+      });
+    });
+
+    it('should not find user - bad password', function(done){
+      User.findByEmailAndPassword('sue@nomail.com', 'wrong', function(user){
+        expect(user).to.be.null;
+        done();
+      });
+    });
+  });
 });
