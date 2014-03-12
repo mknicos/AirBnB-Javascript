@@ -68,7 +68,6 @@ describe('User', function(){
     it('should find user by email and password', function(done){
       User.findByEmailAndPassword('sue@nomail.com', '1234', function(user){
         expect(user.email).to.equal('sue@nomail.com');
-        expect(user.password).to.equal('1234');
         done();
       });
     });

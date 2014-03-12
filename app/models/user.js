@@ -49,3 +49,19 @@ function insert(user, fn){
     }
   });
 }
+
+User.findByEmailAndPassword = function(email, password, fn){
+  users.findOne({email:email}, function(err, record){
+    if(!record){
+      fn(null);
+    }else{
+      bcrypt.compare(password, record.password, function(err, res){
+        if(res){
+          fn(record);
+        }else{
+          fn(null);
+        }
+      });
+    }
+  });
+};
