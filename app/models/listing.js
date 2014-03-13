@@ -17,3 +17,19 @@ Listing.prototype.insert = function(fn){
     fn();
   });
 };
+
+Listing.findAll = function(fn){
+  listings.find().toArray(function(err, records){
+    fn(records);
+  });
+};
+
+Listing.findByGeo = function(query, fn){
+  var lat = query.lat * 1;
+  var lng = query.lng * 1;
+  //BELOW lat and lng are your current coordinates
+  //max distance is in meters
+  listings.find({'coordinates':{$nearSphere:{$geometry:{type:'Point', coordinates:[lat, lng]}}, $maxDistance : 250000}}).toArray(function(err, records){
+    fn(records);
+  });
+};
