@@ -1,0 +1,20 @@
+extends ../shared/template
+
+block content
+  h1= title
+
+  .row
+    .small-4.small-centered.columns
+      form#listingForm(method='post', action='/listings')
+        label Name
+        input(type='text', name='name')
+        label Cost Per Day
+        input(type='text', name='amount')
+        label Address
+        input(type='text', name='address')
+        input(type='hidden', name='lat')
+        input(type='hidden', name='lng')
+        button#createListing Create Listing
+
+block scripts
+    script(src='/js/source/new-listing.js')
